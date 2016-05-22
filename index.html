@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+<head>  
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.min.js"></script>
+	<script type="text/javascript" src="data.js"></script>
+	<script type="text/javascript">
+		window.onload = function () {
+			try {
+				var chart = new CanvasJS.Chart("chartContainer",
+				{
+					culture:  "de",
+					title:{
+						text: "Anzahl von Routern"
+					},
+					axisX:{  
+						valueFormatString: "MMM YYYY",
+						interval: 1,
+						intervalType: "month",
+					},
+
+					data: [
+					{        
+						type: "line",
+						lineThickness: 2,
+						dataPoints: DATA
+					}    
+					]
+				});
+
+				chart.render();
+			} catch(err){
+				alert('Bitte als erstes "python parse.py" ausführen.')
+			}
+		}
+	</script>
+
+</head>
+<body>
+	<div id="chartContainer" style="height: 300px; width: 100%;">
+	</div>
+</body>
+</html>
