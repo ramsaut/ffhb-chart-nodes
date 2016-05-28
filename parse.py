@@ -19,6 +19,7 @@ data = json.loads(f.read())
 data = data['nodes']
 js.write("DATA = [\n")
 a = []
+totalclients = 0
 for node in data:
     if FILTER_BY_GPS:
         if 'location' in data[node]['nodeinfo'].keys():
@@ -26,21 +27,25 @@ for node in data:
             latitude = data[node]['nodeinfo']['location']['latitude']
             longitude = data[node]['nodeinfo']['location']['longitude']
             hostname = data[node]['nodeinfo']['hostname']
+            clients = data[node]['statistics']['clients']
             if((latitude > WALLE_LAT_MIN) and (latitude < WALLE_LAT_MAX) and
                     (longitude > WALLE_LON_MIN) and
                     (longitude < WALLE_LON_MAX)):
                 a.append(firstseen)
+                totalclients += clients
                 csv.write(node +
                           ";" + hostname +
                           ";" + firstseen +
                           ";" + str(latitude) +
-                          ";" + str(longitude) + "\n")
+                          ";" + str(longitude) +
+                          ";" + str(clients) + "\n")
     else:
         a.append(data[node]['firstseen'])
+        totalclients += data[node]['statistics']['clients']
         csv.write(node +
                   ";" + data[node]['nodeinfo']['hostname'] +
                   ";" + data[node]['firstseen'] +
-                  "\n")
+                  ";" + str(data[node]['statistics']['clients']) + "\n")
 
 a = sorted(a)
 current = 0
@@ -54,4 +59,5 @@ for firstseen in a:
     js.write("{x: new Date(" + str(year) + "," + str(month) +
              "," + str(day) + "), y: " + str(current) + "},\n")
 
-js.write("]")
+js.write("]\n")
+js.write("clients = "+str(totalclients))

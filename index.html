@@ -29,6 +29,8 @@
 				});
 
 				chart.render();
+				
+				document.getElementById("clients").innerHTML = "Anzahl von Clients = "+clients
 			} catch(err){
 				alert('Bitte als erstes "python parse.py" ausführen.')
 			}
@@ -39,5 +41,6 @@
 <body>
 	<div id="chartContainer" style="height: 300px; width: 100%;">
 	</div>
+	<p id="clients">Anzahl von Clients: </p>
 </body>
 </html>
