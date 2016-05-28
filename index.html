@@ -23,14 +23,35 @@
 					{        
 						type: "line",
 						lineThickness: 2,
-						dataPoints: DATA
+						dataPoints: BRE
 					}    
 					]
 				});
-
 				chart.render();
-				
-				document.getElementById("clients").innerHTML = "Anzahl von Clients = "+clients
+				document.getElementById("clients").innerHTML = "Anzahl von Clients: "+clients
+
+				var chart = new CanvasJS.Chart("chartContainerWALLE",
+				{
+					culture:  "de",
+					title:{
+						text: "Anzahl von Routern in Walle"
+					},
+					axisX:{  
+						valueFormatString: "MMM YYYY",
+						interval: 1,
+						intervalType: "month",
+					},
+
+					data: [
+					{        
+						type: "line",
+						lineThickness: 2,
+						dataPoints: WALLE
+					}    
+					]
+				});
+				chart.render();
+				document.getElementById("clientsWALLE").innerHTML = "Anzahl von Clients in Walle: "+clientsWALLE
 			} catch(err){
 				alert('Bitte als erstes "python parse.py" ausführen.')
 			}
@@ -42,5 +63,8 @@
 	<div id="chartContainer" style="height: 300px; width: 100%;">
 	</div>
 	<p id="clients">Anzahl von Clients: </p>
+	<div id="chartContainerWALLE" style="height: 300px; width: 100%;">
+	</div>
+	<p id="clientsWALLE">Anzahl von Clients: </p>
 </body>
 </html>
