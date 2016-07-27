@@ -52,6 +52,27 @@
 				});
 				chart.render();
 				document.getElementById("clientsWALLE").innerHTML = "Anzahl von Clients in Walle: "+clientsWALLE
+				var chart = new CanvasJS.Chart("chartContainerWALLEMai2016",
+				{
+					culture:  "de",
+					title:{
+						text: "Anzahl von Routern in Walle ab Mai 2016"
+					},
+					axisX:{
+						valueFormatString: "DD MMM YYYY",
+						interval: 1,
+						intervalType: "week",
+						minimum: new Date(2016,4,1)
+					},
+					data: [
+					{
+						type: "line",
+						lineThickness: 2,
+						dataPoints: WALLE
+					}
+					]
+				});
+				chart.render();
 			} catch(err){
 				alert('Bitte als erstes "python parse.py" ausführen.')
 			}
@@ -66,5 +87,7 @@
 	<div id="chartContainerWALLE" style="height: 300px; width: 100%;">
 	</div>
 	<p id="clientsWALLE">Anzahl von Clients: </p>
+	<div id="chartContainerWALLEMai2016" style="height: 300px; width: 100%;">
+	</div>
 </body>
 </html>
